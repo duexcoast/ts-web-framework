@@ -2,15 +2,21 @@ interface UserProps {
   name?: string;
   age?: number;
 }
+
+type Callback = () => {};
+
 export class User {
   constructor(private data: UserProps) {}
 
-  get(propName: string): string | number {
-    // @ts-ignore:
-    return this.data[propName! as keyof UserProps];
+  get(propName: string): string | number | undefined {
+    return this.data[propName as keyof UserProps];
   }
 
   set(update: UserProps): void {
     Object.assign(this.data, update);
   }
+
+  on(eventName: string, callback: Callback) {}
+
+  trigger(eventName: string): void {}
 }
